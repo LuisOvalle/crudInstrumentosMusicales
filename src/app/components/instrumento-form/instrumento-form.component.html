@@ -1,1 +1,25 @@
-<p>instrumento-form works!</p>
+<div class="card">
+    <div class="card-body">
+        <form (submit)="addInstrumento(nuevoNombre, nuevaMarca, nuevoColor, nuevoPrecio, nuevaDescripcion)">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Nombre" #nuevoNombre>    
+            </div>
+            <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Marca" #nuevaMarca>    
+            </div>
+            <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Color" #nuevoColor>    
+            </div>
+            
+            <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Precio" #nuevoPrecio>    
+            </div>
+            <div class="form-group">
+                        <textarea id="" cols="30" rows="6" placeholder="Descripción" class="form-control" #nuevaDescripcion></textarea>
+            </div>
+            <button class="btn btn-primary btn-block">
+                Guardar
+            </button>
+        </form>
+    </div>
+</div>

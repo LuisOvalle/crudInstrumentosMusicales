@@ -8,6 +8,8 @@ import { InstrumentoFormComponent } from './components/instrumento-form/instrume
 import { InstrumentoComponent } from './components/instrumento/instrumento.component';
 import { InstrumentoListComponent } from './components/instrumento-list/instrumento-list.component';
 
+import { InstrumentoService } from './services/instrumento.service'
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,7 +22,7 @@ import { InstrumentoListComponent } from './components/instrumento-list/instrume
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [InstrumentoService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

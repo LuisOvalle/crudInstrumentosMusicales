@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
+import { InstrumentoService } from '../../services/instrumento.service'
+import { Instrumento } from '../../models/Instrumento'
+
 @Component({
   selector: 'app-instrumento-list',
   templateUrl: './instrumento-list.component.html',
@@ -7,9 +10,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InstrumentoListComponent implements OnInit {
 
-  constructor() { }
+  instrumentos: Instrumento[];
+
+  constructor(
+    public instrumentoServicio: InstrumentoService
+  ) { }
 
   ngOnInit() {
+    this.instrumentos = this.instrumentoServicio.getInstrumentos();
   }
 
 }
