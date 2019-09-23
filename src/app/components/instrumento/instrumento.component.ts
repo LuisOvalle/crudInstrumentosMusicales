@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Instrumento } from 'src/app/models/Instrumento';
+import { InstrumentoListComponent } from '../instrumento-list/instrumento-list.component';
+import { InstrumentoService } from '../../services/instrumento.service';
 
 @Component({
   selector: 'app-instrumento',
@@ -7,9 +10,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InstrumentoComponent implements OnInit {
 
-  constructor() { }
+  @Input() instrumento: Instrumento;
+
+  constructor(
+    public instrumentoServicio: InstrumentoService
+  ) { }
 
   ngOnInit() {
   }
 
+  deleteInstrumento(instrumento: Instrumento){
+    if(confirm('¿Desea eliminar este instrumento?')){
+      this.instrumentoServicio.deleteInstrumento(instrumento);
+    }
+  }
 }

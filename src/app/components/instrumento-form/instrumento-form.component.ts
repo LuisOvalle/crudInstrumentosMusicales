@@ -27,6 +27,12 @@ export class InstrumentoFormComponent implements OnInit {
       precio: nuevoPrecio.value,
       descripcion: nuevaDescripcion.value
     });
+    nuevoNombre.value ='';
+    nuevaMarca.value='';
+    nuevoColor.value='';
+    nuevoPrecio.value='';
+    nuevaDescripcion.value='';
+    nuevoNombre.focus();
     return false;
   }
 }
