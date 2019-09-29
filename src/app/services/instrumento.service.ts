@@ -29,6 +29,10 @@ export class InstrumentoService {
     }
   }
 
+  getInstrumento(i: number){
+    return this.instrumentos[i];
+  }
+
   addInstrumento(pInstrumento){
     this.instrumentos.unshift(pInstrumento);
     let instrumentos: Instrumento[] = [];
@@ -49,5 +53,11 @@ export class InstrumentoService {
         localStorage.setItem('instrumentos', JSON.stringify(this.instrumentos));
       }
     }
+  }
+
+  updateInstrumento(pInstrumento: Instrumento, id: number){
+    this.instrumentos.splice(id,1);
+    localStorage.setItem('instrumentos', JSON.stringify(this.instrumentos));
+    this.addInstrumento(pInstrumento);
   }
 }

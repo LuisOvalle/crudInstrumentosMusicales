@@ -5,7 +5,8 @@ import { InstrumentoListComponent } from './components/instrumento-list/instrume
 
 const routes: Routes = [
   { path: 'agregarInstrumento', component: InstrumentoFormComponent},
-  { path: 'instrumentos', component: InstrumentoListComponent}
+  { path: 'instrumentos', component: InstrumentoListComponent},
+  { path: 'instrumentos/editar/:id', component: InstrumentoFormComponent}
 ];
 
 @NgModule({

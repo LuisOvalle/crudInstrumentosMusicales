@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { InstrumentoService} from '../../services/instrumento.service'
 import { Instrumento } from '../../models/Instrumento';
-import { Router } from '@angular/router'
+import { ActivatedRoute, Router } from '@angular/router'
 
 
 @Component({
@@ -12,22 +12,33 @@ import { Router } from '@angular/router'
 
 export class InstrumentoFormComponent implements OnInit {
   public nuevoInstrumento: Instrumento;
+  public editar: boolean = false;
+  parametros;
 
   constructor(
     public instrumentoServicio: InstrumentoService,
-    private router:Router
+    private router:Router,
+    private activatedRoute: ActivatedRoute
   ) { }
 
   ngOnInit() {
-    this.nuevoInstrumento = new Instrumento();
+    this.parametros = this.activatedRoute.snapshot.params;
+    if(this.parametros.id){
+      this.nuevoInstrumento = this.instrumentoServicio.getInstrumento(this.parametros.id);
+      this.editar = true;
+      console.log(this.editar);
+    } else {
+      this.nuevoInstrumento = new Instrumento();
+    }
   }
 
-  addInstrumento(nuevaMarca: HTMLInputElement, nuevaClasificacion: HTMLInputElement, 
-  nuevoPrecio: HTMLInputElement, nuevaDescripcion: HTMLInputElement){
-    //cancelar la recarga de la pagina, porque es dentro del mismo servidor
+  addInstrumento(){
     this.instrumentoServicio.addInstrumento(this.nuevoInstrumento);
     this.router.navigate(['/instrumentos']);
-    //nuevoNombre.focus();
-    //return false;
+  }
+
+  updateInstrumento(){
+    this.instrumentoServicio.updateInstrumento(this.nuevoInstrumento, this.parametros.id);
+    this.router.navigate(['/instrumentos']);
   }
 }

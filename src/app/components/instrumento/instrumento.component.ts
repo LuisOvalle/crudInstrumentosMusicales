@@ -11,6 +11,7 @@ import { InstrumentoService } from '../../services/instrumento.service';
 export class InstrumentoComponent implements OnInit {
 
   @Input() instrumento: Instrumento;
+  @Input() index: Instrumento;
 
   constructor(
     public instrumentoServicio: InstrumentoService

@@ -2,6 +2,7 @@
     <thead class="thead-light"> 
         <tr>
         <!-- <th scope="col">#</th> -->
+        <th scope="col">#</th>
         <th scope="col">Nombre</th>
         <th scope="col">Marca</th>
         <th scope="col">Clasificación</th>
@@ -13,7 +14,8 @@
     <tbody>
         <!--<app-instrumento *ngFor="let instrumento of instrumentos" [instrumento]="instrumento"></app-instrumento>-->
         <!---->
-        <tr *ngFor="let instrumento of instrumentos">
+        <tr *ngFor="let instrumento of instrumentos; let i=index">
+            <td>{{i}}</td>
             <td>{{instrumento.nombre}}</td>
             <td>{{instrumento.marca}}</td>
             <td>{{instrumento.clasificacion}}</td>
@@ -28,7 +30,7 @@
                     Borrar
                 </button>
                 -->
-                <app-instrumento  [instrumento]="instrumento"></app-instrumento>
+                <app-instrumento  [instrumento]="instrumento" [index]="i"></app-instrumento>
             </td>
         </tr>
     </tbody>

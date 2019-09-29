@@ -1,6 +1,6 @@
 <div class="card">
     <div class="card-body">
-        <form (submit)="addInstrumento( nuevaMarca, nuevaClasificacion, nuevoPrecio, nuevaDescripcion)">
+        <form (submit)="editar ? updateInstrumento() : addInstrumento()">
             <div class="form-group">
                 <input type="text" class="form-control" placeholder="Nombre" name="nombre" [(ngModel)]="nuevoInstrumento.nombre" >    
             </div>
