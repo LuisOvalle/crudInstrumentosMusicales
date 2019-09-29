@@ -1,38 +1,33 @@
 import { Component, OnInit } from '@angular/core';
-
 import { InstrumentoService} from '../../services/instrumento.service'
+import { Instrumento } from '../../models/Instrumento';
+import { Router } from '@angular/router'
+
 
 @Component({
   selector: 'app-instrumento-form',
   templateUrl: './instrumento-form.component.html',
   styleUrls: ['./instrumento-form.component.css']
 })
+
 export class InstrumentoFormComponent implements OnInit {
+  public nuevoInstrumento: Instrumento;
 
   constructor(
-    public instrumentoServicio: InstrumentoService
+    public instrumentoServicio: InstrumentoService,
+    private router:Router
   ) { }
 
   ngOnInit() {
+    this.nuevoInstrumento = new Instrumento();
   }
 
-  addInstrumento(nuevoNombre: HTMLInputElement, nuevaMarca: HTMLInputElement, nuevoColor: HTMLInputElement, 
+  addInstrumento(nuevaMarca: HTMLInputElement, nuevaClasificacion: HTMLInputElement, 
   nuevoPrecio: HTMLInputElement, nuevaDescripcion: HTMLInputElement){
-    console.log('Agregando Instrumento: ', nuevoNombre.value, nuevaMarca.value, nuevoColor.value, nuevoPrecio.value, nuevaDescripcion.value)
     //cancelar la recarga de la pagina, porque es dentro del mismo servidor
-    this.instrumentoServicio.addInstrumento({
-      nombre: nuevoNombre.value,
-      marca: nuevaMarca.value,
-      color: nuevoColor.value,
-      precio: nuevoPrecio.value,
-      descripcion: nuevaDescripcion.value
-    });
-    nuevoNombre.value ='';
-    nuevaMarca.value='';
-    nuevoColor.value='';
-    nuevoPrecio.value='';
-    nuevaDescripcion.value='';
-    nuevoNombre.focus();
-    return false;
+    this.instrumentoServicio.addInstrumento(this.nuevoInstrumento);
+    this.router.navigate(['/instrumentos']);
+    //nuevoNombre.focus();
+    //return false;
   }
 }

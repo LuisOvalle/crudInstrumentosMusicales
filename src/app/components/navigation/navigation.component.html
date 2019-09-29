@@ -7,6 +7,46 @@
             />
             Instrumentos Musicales
         </a>
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Dropdown button
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="/agregarInstrumento">Agregar Instrumento</a>
+                <a class="dropdown-item" href="/instrumentos">Listar instrumentos</a>
+                <a class="dropdown-item" href="#">Contacto</a>
+            </div>    
+        </div>
+
+        <div ngbDropdown class="d-inline-block">
+                <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Toggle dropdown</button>
+                <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                  <button ngbDropdownItem>Action - 1</button>
+                  <button ngbDropdownItem>Another Action</button>
+                  <button ngbDropdownItem>Something else is here</button>
+                </div>
+        </div>
+
+        <div class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <a class="dropdown-item" href="#">Something else here</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Separated link</a>
+            </div>
+        </div>
+
+        <div class="dropdown" dropdown >
+                <a dropdownToggle role="button"> <!-- {2} -->
+                    Menu<span class="caret"></span></a>
+                <div *dropdownMenu class="dropdown-menu">
+                    <a class="dropdown-item" href="/agregarInstrumento">Agregar Instrumento</a>
+                    <a class="dropdown-item" href="/instrumentos">Listar instrumentos</a>
+                </div>
+            </div>
+
         <img
                 width="50"
                 alt="Angular Logo"

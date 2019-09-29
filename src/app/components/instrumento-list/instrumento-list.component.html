@@ -1,16 +1,35 @@
 <table class="table">
-    <thead>
+    <thead class="thead-light"> 
         <tr>
         <!-- <th scope="col">#</th> -->
         <th scope="col">Nombre</th>
         <th scope="col">Marca</th>
-        <th scope="col">Color</th>
+        <th scope="col">Clasificación</th>
         <th scope="col">Precio</th>
         <th scope="col">Descripcion</th>
         <th scope="col">Acción</th>
         </tr>
     </thead>
     <tbody>
-        <app-instrumento *ngFor="let instrumento of instrumentos" [instrumento]="instrumento"></app-instrumento>
+        <!--<app-instrumento *ngFor="let instrumento of instrumentos" [instrumento]="instrumento"></app-instrumento>-->
+        <!---->
+        <tr *ngFor="let instrumento of instrumentos">
+            <td>{{instrumento.nombre}}</td>
+            <td>{{instrumento.marca}}</td>
+            <td>{{instrumento.clasificacion}}</td>
+            <td>Q. {{instrumento.precio}}</td>
+            <td>{{instrumento.descripcion}}</td>
+            <td >
+                <!--
+                <button class="btn btn-primary">
+                    Editar
+                </button>
+                <button class="btn btn-danger" (click)="deleteInstrumento(instrumento)">
+                    Borrar
+                </button>
+                -->
+                <app-instrumento  [instrumento]="instrumento"></app-instrumento>
+            </td>
+        </tr>
     </tbody>
 </table>

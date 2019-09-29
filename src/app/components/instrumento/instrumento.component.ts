@@ -20,7 +20,7 @@ export class InstrumentoComponent implements OnInit {
   }
 
   deleteInstrumento(instrumento: Instrumento){
-    if(confirm('¿Desea eliminar este instrumento?')){
+    if(confirm('¿Desea eliminar "' + instrumento.nombre + '" del listado de instrumentos?')){
       this.instrumentoServicio.deleteInstrumento(instrumento);
     }
   }

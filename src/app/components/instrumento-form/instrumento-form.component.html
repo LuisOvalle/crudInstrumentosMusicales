@@ -1,21 +1,30 @@
 <div class="card">
     <div class="card-body">
-        <form (submit)="addInstrumento(nuevoNombre, nuevaMarca, nuevoColor, nuevoPrecio, nuevaDescripcion)">
+        <form (submit)="addInstrumento( nuevaMarca, nuevaClasificacion, nuevoPrecio, nuevaDescripcion)">
             <div class="form-group">
-                <input type="text" class="form-control" placeholder="Nombre" #nuevoNombre>    
+                <input type="text" class="form-control" placeholder="Nombre" name="nombre" [(ngModel)]="nuevoInstrumento.nombre" >    
             </div>
             <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Marca" #nuevaMarca>    
+                    <input type="text" class="form-control" placeholder="Marca" name="marca" [(ngModel)]="nuevoInstrumento.marca">    
             </div>
+            <label>Clasificación</label>
             <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Color" #nuevoColor>    
+                    <!--<input type="text" class="form-control" placeholder="Clasificación" #nuevaClasificacion>-->
+                    <select class="form-control" id="selClasificacion" name="clasificacion" [(ngModel)]="nuevoInstrumento.clasificacion">
+                        <option>De Cuerda</option>
+                        <option>De Viento</option>
+                        <option>De Percusión</option>
+                        <option>De Teclado</option>
+                        <option>De ruido</option>
+                        <option>Electrófono </option>
+                    </select>    
             </div>
             
             <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Precio" #nuevoPrecio>    
+                    <input type="text" class="form-control" placeholder="Precio" name="precio" [(ngModel)]="nuevoInstrumento.precio">    
             </div>
             <div class="form-group">
-                        <textarea id="" cols="30" rows="6" placeholder="Descripción" class="form-control" #nuevaDescripcion></textarea>
+                        <textarea id="" cols="30" rows="6" placeholder="Descripción" class="form-control" name="descripcion" [(ngModel)]="nuevoInstrumento.descripcion"></textarea>
             </div>
             <button class="btn btn-primary btn-block">
                 Guardar

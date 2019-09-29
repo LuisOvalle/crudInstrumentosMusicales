@@ -14,14 +14,14 @@ export class InstrumentoService {
   instrumentos: Instrumento[];
   constructor() { 
     this.instrumentos =[
-      //{nombre: 'Piano', marca: 'Yamaha', color: 'Negro', precio: 10000, descripcion: 'Piano clasico eléctrico P-45'},
-      //{nombre: 'Guitarra Electrica', marca: 'Fender', color: 'Azul', precio: 2000, descripcion: 'Guitarra electro acustica  FA-125CE'}
+      //{nombre: 'Piano', marca: 'Yamaha', clasificacion: 'Negro', precio: 10000, descripcion: 'Piano clasico eléctrico P-45'},
+      //{nombre: 'Guitarra Electrica', marca: 'Fender', clasificacion: 'Azul', precio: 2000, descripcion: 'Guitarra electro acustica  FA-125CE'}
     ];
 
   }
 
   getInstrumentos(){
-    if(localStorage.getItem('instrumentos'===null)){
+    if(localStorage.getItem('instrumentos')===null){
       return this.instrumentos;
     }else{
       this.instrumentos = JSON.parse(localStorage.getItem('instrumentos'))
@@ -30,14 +30,14 @@ export class InstrumentoService {
   }
 
   addInstrumento(pInstrumento){
-    this.instrumentos.push(pInstrumento);
+    this.instrumentos.unshift(pInstrumento);
     let instrumentos: Instrumento[] = [];
     if(localStorage.getItem('instrumentos') === null){
-      instrumentos.push(pInstrumento);
+      instrumentos.unshift(pInstrumento);
       localStorage.setItem('instrumentos', JSON.stringify(instrumentos));
     }else{
       instrumentos = JSON.parse(localStorage.getItem('instrumentos'));
-      instrumentos.push(pInstrumento);
+      instrumentos.unshift(pInstrumento);
       localStorage.setItem('instrumentos', JSON.stringify(instrumentos));
     }
   }
