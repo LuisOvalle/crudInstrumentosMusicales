@@ -1,16 +1,27 @@
 <div class="card">
     <div class="card-body">
-        <form (submit)="editar ? updateInstrumento() : addInstrumento()">
+        <form (submit)="editar ? updateInstrumento(form) : addInstrumento(form)" #form="ngForm">
             <div class="form-group">
-                <input type="text" class="form-control" placeholder="Nombre" name="nombre" [(ngModel)]="nuevoInstrumento.nombre" >    
+                <input type="text" class="form-control" placeholder="Nombre" name="nombre" [(ngModel)]="nuevoInstrumento.nombre" #nuevoNombre="ngModel"
+                minlength="3" maxlength="30" required>
+                <div *ngIf="(nuevoNombre.touched||nuevoNombre.dirty) && !nuevoNombre.valid">
+                    <div *ngIf="nuevoNombre.errors.required" class="alert alert-danger" role="alert">El campo nombre es obligatorio</div>
+                    <div *ngIf="nuevoNombre.errors.minlength" class="alert alert-danger" role="alert">El campo nombre es debe de tener al menos 3 caracteres</div>
+                    <div *ngIf="nuevoNombre.errors.maxlength" class="alert alert-danger" role="alert">El campo nombre es debe de tener 30 caracteres como máximo</div>
+                </div>
             </div>
             <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Marca" name="marca" [(ngModel)]="nuevoInstrumento.marca">    
+                    <input type="text" class="form-control" placeholder="Marca" name="marca" [(ngModel)]="nuevoInstrumento.marca" #nuevaMarca="ngModel"
+                    minlength="2" maxlength="20" required>
+                    <div *ngIf="(nuevaMarca.touched||nuevaMarca.dirty) && !nuevaMarca.valid">
+                        <div *ngIf="nuevaMarca.errors.required" class="alert alert-danger" role="alert">El campo marca es obligatorio</div>
+                        <div *ngIf="nuevaMarca.errors.minlength" class="alert alert-danger" role="alert">El campo nombre es debe de tener al menos 2 caracteres</div>
+                    </div>       
             </div>
             <label>Clasificación</label>
-            <div class="form-group">
-                    <!--<input type="text" class="form-control" placeholder="Clasificación" #nuevaClasificacion>-->
-                    <select class="form-control" id="selClasificacion" name="clasificacion" [(ngModel)]="nuevoInstrumento.clasificacion">
+           <div class="form-group">
+                    <select class="form-control" id="selClasificacion" name="clasificacion" [(ngModel)]="nuevoInstrumento.clasificacion" #nuevaClase="ngModel"
+                     required>
                         <option>De Cuerda</option>
                         <option>De Viento</option>
                         <option>De Percusión</option>
@@ -18,17 +29,33 @@
                         <option>De ruido</option>
                         <option>Electrófono </option>
                     </select>    
+                    <div *ngIf="(nuevaClase.touched||nuevaClase.dirty) && !nuevaClase.valid">
+                            <div *ngIf="nuevaClase.errors.required" class="alert alert-danger" role="alert">El campo clasificación es obligatorio</div>
+                    </div>   
             </div>
             
             <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Precio" name="precio" [(ngModel)]="nuevoInstrumento.precio">    
+                    <input type="text" class="form-control" placeholder="Precio" name="precio" [(ngModel)]="nuevoInstrumento.precio" #nuevoPrecio="ngModel"
+                    minlength="1" maxlength="10" required pattern="[0-9]+\.?[0-9]{0,2}">
+                    <div *ngIf="(nuevoPrecio.touched||nuevoPrecio.dirty) && !nuevoPrecio.valid">
+                        <div *ngIf="nuevoPrecio.errors.required" class="alert alert-danger" role="alert">El campo precio es obligatorio</div>
+                        <div *ngIf="nuevoPrecio.errors.minlength" class="alert alert-danger" role="alert">El campo nombre es debe de tener al menos 1 caracter</div>
+                        <div *ngIf="nuevoPrecio.errors.pattern" class="alert alert-danger" role="alert">El precio tiene que ser un numero con dos decimales como máximo y con un punto como separador</div>
+                    </div>       
             </div>
             <div class="form-group">
-                        <textarea id="" cols="30" rows="6" placeholder="Descripción" class="form-control" name="descripcion" [(ngModel)]="nuevoInstrumento.descripcion"></textarea>
+                    <textarea id="" cols="30" rows="6" placeholder="Descripción" class="form-control" name="descripcion" [(ngModel)]="nuevoInstrumento.descripcion" #nuevaDescripcion="ngModel"
+                    minlength="3" maxlength="200" required>
+                    </textarea>
+                    <div *ngIf="(nuevaDescripcion.touched||nuevaDescripcion.dirty) && !nuevaDescripcion.valid">
+                            <div *ngIf="nuevaDescripcion.errors.required" class="alert alert-danger" role="alert">El campo descripción es obligatorio</div>   
+                            <div *ngIf="nuevaDescripcion.errors.minlength" class="alert alert-danger" role="alert">El campo nombre es debe de tener al menos 3 caracteres</div>
+                    </div>    
             </div>
             <button class="btn btn-primary btn-block">
                 Guardar
             </button>
+            <div *ngIf="mosrarMensaje" class="alert alert-danger" role="alert">{{mensaje}}</div>
         </form>
     </div>
 </div>
