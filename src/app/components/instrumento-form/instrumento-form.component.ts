@@ -59,7 +59,11 @@ export class InstrumentoFormComponent implements OnInit {
         this.router.navigate(['/instrumentos']);
       }    
     } else {
-
+      this.mensaje="Por favor corregir campos."
+      this.mosrarMensaje=true;
+      setTimeout(()=>{
+        this.mosrarMensaje=false
+      },5000  );
     }
     
   }
