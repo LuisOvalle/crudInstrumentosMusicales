@@ -7,7 +7,7 @@
     <td>{{instrumento.descripcion}}</td>
     <td>
         -->
-        <button class="btn btn-primary" [routerLink]="['/instrumentos/editar',index]">
+        <button class="btn btn-primary" [routerLink]="['/instrumentos/editar',instrumento.id]">
             Editar
         </button>
         <button class="btn btn-danger" (click)="deleteInstrumento(instrumento)">

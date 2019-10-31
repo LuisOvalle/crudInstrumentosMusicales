@@ -11,13 +11,20 @@ import { Instrumento } from '../../models/Instrumento'
 export class InstrumentoListComponent implements OnInit {
 
   instrumentos: Instrumento[];
+  
+  actualizarInstrumentos() {
+    this.instrumentoServicio.getInstrumentos().subscribe((res) => {
+      this.instrumentos = res as Instrumento[];
+    });
+  }
 
   constructor(
     public instrumentoServicio: InstrumentoService
   ) { }
 
   ngOnInit() {
-    this.instrumentos = this.instrumentoServicio.getInstrumentos();
+    //this.instrumentos = this.instrumentoServicio.getInstrumentos();
+    this.actualizarInstrumentos();
   }
 
 }

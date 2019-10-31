@@ -5,35 +5,40 @@ import { InstrumentoListComponent } from '../components/instrumento-list/instrum
 import { toASCII } from 'punycode';
 import { JsonPipe } from '@angular/common';
 import { TagContentType } from '@angular/compiler';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class InstrumentoService {
+  readonly URLAConsumir = 'http://localhost:3000/api/v1/instrumentosMusicales';
 
   instrumentos: Instrumento[];
-  constructor() { 
+  constructor(private http: HttpClient) { 
     this.instrumentos =[
       //{nombre: 'Piano', marca: 'Yamaha', clasificacion: 'Negro', precio: 10000, descripcion: 'Piano clasico eléctrico P-45'},
       //{nombre: 'Guitarra Electrica', marca: 'Fender', clasificacion: 'Azul', precio: 2000, descripcion: 'Guitarra electro acustica  FA-125CE'}
     ];
-
   }
 
   getInstrumentos(){
-    if(localStorage.getItem('instrumentos')===null){
+    /*if(localStorage.getItem('instrumentos')===null){
       return this.instrumentos;
     }else{
       this.instrumentos = JSON.parse(localStorage.getItem('instrumentos'))
       return this.instrumentos;
-    }
+    }*/
+    return this.http.get(this.URLAConsumir);
   }
 
   getInstrumento(i: number){
-    return this.instrumentos[i];
+    //return this.instrumentos[i];
+    console.log(this.URLAConsumir+ '/'+ i)
+    return this.http.get(this.URLAConsumir + '/'+ i);
   }
 
   addInstrumento(pInstrumento){
+    /*
     this.instrumentos.unshift(pInstrumento);
     let instrumentos: Instrumento[] = [];
     if(localStorage.getItem('instrumentos') === null){
@@ -44,20 +49,25 @@ export class InstrumentoService {
       instrumentos.unshift(pInstrumento);
       localStorage.setItem('instrumentos', JSON.stringify(instrumentos));
     }
+    */
+    return this.http.post(this.URLAConsumir, pInstrumento);
   }
 
   deleteInstrumento(pInstrumento: Instrumento){
-    for (let i = 0; i < this.instrumentos.length; i++) {
+    /*for (let i = 0; i < this.instrumentos.length; i++) {
       if(pInstrumento == this.instrumentos[i]) {
         this.instrumentos.splice(i,1);
         localStorage.setItem('instrumentos', JSON.stringify(this.instrumentos));
       }
-    }
+    }*/
+    return this.http.delete(this.URLAConsumir + '/'+ pInstrumento.id);
   }
 
   updateInstrumento(pInstrumento: Instrumento, id: number){
-    this.instrumentos.splice(id,1);
+    /*this.instrumentos.splice(id,1);
     localStorage.setItem('instrumentos', JSON.stringify(this.instrumentos));
-    this.addInstrumento(pInstrumento);
+    this.addInstrumento(pInstrumento);*/
+    delete pInstrumento.id;
+    return this.http.put(this.URLAConsumir + '/'+ id , pInstrumento);
   }
 }

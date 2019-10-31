@@ -1,4 +1,5 @@
 export class Instrumento{
+    id: number;
     nombre: string;
     marca: string;
     clasificacion: string;
@@ -6,6 +7,7 @@ export class Instrumento{
     descripcion: string;
 
     constructor(){
+        this.id =0;
         this.nombre="";
         this.marca="";
         //this.clasificacion="";

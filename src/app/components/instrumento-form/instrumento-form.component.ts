@@ -18,6 +18,13 @@ export class InstrumentoFormComponent implements OnInit {
   mensaje:string
   public mosrarMensaje = false
   public nombreViejo ="";
+  instrumentos: Instrumento[];
+  
+  actualizarInstrumentos() {
+    this.instrumentoServicio.getInstrumentos().subscribe((res) => {
+      this.instrumentos = res as Instrumento[];
+    });
+  }
 
   constructor(
     public instrumentoServicio: InstrumentoService,
@@ -28,19 +35,36 @@ export class InstrumentoFormComponent implements OnInit {
   ngOnInit() {
     this.parametros = this.activatedRoute.snapshot.params;
     if(this.parametros.id){
-      this.nuevoInstrumento = this.instrumentoServicio.getInstrumento(this.parametros.id);
-      this.nombreViejo = this.nuevoInstrumento.nombre;
+      //this.nuevoInstrumento = this.instrumentoServicio.getInstrumento(this.parametros.id);
+      this.getInstrumento();
+      /*this.nombreViejo = this.nuevoInstrumento.nombre;
       this.editar = true;
       console.log(this.editar);
+      console.log("nuevo instrumento: "+ Object.keys(this.nuevoInstrumento))*/
     } else {
       this.nuevoInstrumento = new Instrumento();
     }
   }
 
+  getInstrumento() {
+    this.instrumentoServicio.getInstrumento(this.parametros.id).subscribe((res) => {
+      this.instrumentos = res as Instrumento[];
+      this.nuevoInstrumento = this.instrumentos[0];
+      this.nombreViejo = this.nuevoInstrumento.nombre;
+      this.editar = true;
+      console.log(this.editar);
+      console.log("nuevo instrumento: "+ Object.keys(this.nuevoInstrumento))
+    });
+  }
+
   addInstrumento(form: NgForm){
     if(form.valid==true){
-      this.instrumentoServicio.addInstrumento(this.nuevoInstrumento);
-      this.router.navigate(['/instrumentos']);
+      /*this.instrumentoServicio.addInstrumento(this.nuevoInstrumento);
+      this.router.navigate(['/instrumentos']);*/
+      delete this.nuevoInstrumento.id;
+      this.instrumentoServicio.addInstrumento(this.nuevoInstrumento).subscribe((res) => {
+        this.router.navigate(['/instrumentos']);
+      })
     } else {
       this.mensaje="Por favor corregir campos."
       this.mosrarMensaje=true;
@@ -55,8 +79,9 @@ export class InstrumentoFormComponent implements OnInit {
   updateInstrumento(form: NgForm){
     if(form.valid==true){
       if(confirm('¿Desea sobre escribir "' + this.nombreViejo + '"?')){
-        this.instrumentoServicio.updateInstrumento(this.nuevoInstrumento, this.parametros.id);
-        this.router.navigate(['/instrumentos']);
+        this.instrumentoServicio.updateInstrumento(this.nuevoInstrumento, this.parametros.id).subscribe((res) => {
+          this.router.navigate(['/instrumentos']);
+        });
       }    
     } else {
       this.mensaje="Por favor corregir campos."
