@@ -1,3 +1,4 @@
+Nota: La tabla será actualizada cada minuto, debido a políticas de caché. Los cambios o nuevos instrumentos se visualizarán hasta después de un minuto.
 <table class="table">
     <thead class="thead-light"> 
         <tr>
@@ -15,7 +16,7 @@
         <!--<app-instrumento *ngFor="let instrumento of instrumentos" [instrumento]="instrumento"></app-instrumento>-->
         <!---->
         <tr *ngFor="let instrumento of instrumentos; let i=index">
-            <td>{{i}}</td>
+            <td>{{instrumento.id}}</td>
             <td>{{instrumento.nombre}}</td>
             <td>{{instrumento.marca}}</td>
             <td>{{instrumento.clasificacion}}</td>

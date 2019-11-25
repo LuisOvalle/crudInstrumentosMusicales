@@ -4,6 +4,7 @@ import { InstrumentoFormComponent } from './components/instrumento-form/instrume
 import { InstrumentoListComponent } from './components/instrumento-list/instrumento-list.component';
 
 const routes: Routes = [
+  { path: '', redirectTo: '/instrumentos', pathMatch :'full'},
   { path: 'agregarInstrumento', component: InstrumentoFormComponent},
   { path: 'instrumentos', component: InstrumentoListComponent},
   { path: 'instrumentos/editar/:id', component: InstrumentoFormComponent}
