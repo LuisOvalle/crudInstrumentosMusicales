@@ -21,7 +21,7 @@ services:
     networks:
       - IMNetwork
   imapi:
-    image: lpovalle/api_instrumentos_musicales:prueba4
+    image: lpovalle/api_instrumentos_musicales:produccion
     container_name: imapi
     ports:
       - "3000:3000"

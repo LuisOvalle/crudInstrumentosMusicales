@@ -6,12 +6,14 @@ import { toASCII } from 'punycode';
 import { JsonPipe } from '@angular/common';
 import { TagContentType } from '@angular/compiler';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class InstrumentoService {
-  readonly URLAConsumir = 'http://localhost:3000/api/v1/instrumentosMusicales';
+  urlAConectar:string = environment.url;
+  readonly URLAConsumir = this.urlAConectar;
 
   instrumentos: Instrumento[];
   constructor(private http: HttpClient) { 
@@ -28,6 +30,7 @@ export class InstrumentoService {
       this.instrumentos = JSON.parse(localStorage.getItem('instrumentos'))
       return this.instrumentos;
     }*/
+    console.log('URL A CONSUMIR: '+ this.urlAConectar)
     return this.http.get(this.URLAConsumir);
   }
 
@@ -67,6 +70,7 @@ export class InstrumentoService {
     /*this.instrumentos.splice(id,1);
     localStorage.setItem('instrumentos', JSON.stringify(this.instrumentos));
     this.addInstrumento(pInstrumento);*/
+
     delete pInstrumento.id;
     return this.http.put(this.URLAConsumir + '/'+ id , pInstrumento);
   }
